@@ -6,12 +6,8 @@ if [ "$#" -eq 0 ]; then
 fi
 
 input="$*"
-system_msg="You only answer with the exact info the user has asked for without any additional information. so that the user can copy your entire answer and apply it. for example if he wants a cli command your entire answer should be only the command. if he wants a piece of code your entire answer should only consist of the code. For context the users system is a debian machine with amd64 architecture.
-Do not use any quotes around code.
-"
-
-output=$(ollama run llama3.2 "System: $system_msg. User: $input")
-
+system_msg="Keep it brief. dont over explain."
+output=$(ollama run llama3.2 "$system_msg. $input")
 echo "$output"
 
 if command -v xclip &>/dev/null; then
