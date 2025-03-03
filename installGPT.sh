@@ -10,6 +10,9 @@ if ! command -v xclip &>/dev/null; then
   sudo apt update && sudo apt install xclip
 fi
 
+sudo cp gpt_base.sh /usr/local/bin/gptbase
+sudo chmod +x /usr/local/bin/gptbase
+
 sudo cp gpt.sh /usr/local/bin/gpt
 sudo chmod +x /usr/local/bin/gpt
 echo "gpt installed: to use run: gpt <your question>"

@@ -1,19 +1,12 @@
 #!/bin/bash
 
 if [ "$#" -eq 0 ]; then
-    echo "Usage: gpt <question>"
+    echo "Usage: coder <question>"
     exit 1
 fi
 
 input="$*"
-system_msg="Keep it brief. dont over explain."
-output=$(ollama run llama3.2 "$system_msg. $input")
-echo "$output"
+log_file="/var/log/gpt.log"
+system_msg="System: You are the assistant assisting the user. Keep it brief. dont over explain."
 
-if command -v xclip &>/dev/null; then
-    echo "$output" | xclip -selection clipboard  # Uses xclip
-elif command -v xsel &>/dev/null; then
-    echo "$output" | xsel --clipboard --input  # Uses xsel
-else
-    echo "Clipboard copy not supported. Install xclip or xsel."
-fi
+gptbase "$system_msg" "$log_file" "$input"
